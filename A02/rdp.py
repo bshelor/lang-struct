@@ -107,7 +107,7 @@ def tokenize(lst):
     pos = 0
 
     for line in range(len(lst)):
-        print("line="+lst[line])
+        # print("line="+lst[line])
         # print("length of line --> "+str(len(lst[line])))
         dictList[line] = []
         pos = 0
@@ -214,7 +214,7 @@ def Start():
     val = peek()
 
     if val['tag'] in validTags:
-        # pass
+        print("valid tag")
         List()
     elif val['tag'] == "EOF":
         EOF()
@@ -229,11 +229,12 @@ def EOF():
 def List():
     val = peek()
     if val['item'] == '(' or val['tag'] in ["NUM","ID"]:
+        print("got through List")
         Expr()
         match(';')
         List()
     else:
-        return "pass"
+        return
 
 def Expr():
     Term()
@@ -281,7 +282,7 @@ def Factors():
         return
 
 def dumpSymbolTable():
-    pass
+    print("dumping symbol table...")
 
 
 
@@ -295,7 +296,6 @@ def main():
     # print()
     tokenize(listOfStatements)
 
-    # Start()
     # print(dictList)
 
     # print(next(["&"],0,0))
@@ -306,6 +306,9 @@ def main():
         # print("Line "+str(line))
         print(dictList[line])
     # print(dictList)
+
+    print()
+    Start()
 
     # print(token())
     # print("peek=",peek())
