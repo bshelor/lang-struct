@@ -1,7 +1,10 @@
 import sys
 
-global dictList
+global dictList, validTags, tokenIter
+
 dictList = []
+validTags = ['NUM','ID','FACTOR','TERM','MOD','OTHER','EXPR_END','PAREN']
+tokenIter = {'line': 0, 'iter': 0}
 
 def initDict(length):
     global dictList
@@ -173,33 +176,112 @@ def tokenize(lst):
 
 #             position+=1
 
+def error(type, token):
+    print("\n"+type+" Error ----------------------------------")
+    print("on line "+str(token["line_num"])+", near "+str(token["item"]))
+    exit()
+
+def token():
+    global tokenIter, dictList
+
+    if tokenIter['line'] == len(dictList):
+        return "done"
+
+    val = dictList[tokenIter['line']][tokenIter['iter']]
+
+    if tokenIter['iter'] == ( len(dictList[tokenIter['line']]) - 1 ):
+        tokenIter['line'] += 1
+        tokenIter['iter'] = 0
+    else:
+        tokenIter['iter'] += 1
+
+    return val
+
+def peek():
+    global tokenIter, dictList
+
+    return dictList[tokenIter['line']][tokenIter['iter']]
+
+def match(char):
+    if char != ';':
+        print(char, end=" ")
+    else:
+        print(char)
+
 def Start():
-    global dictList
-    List()
+    global validTags
+
+    val = peek()
+
+    if val['tag'] in validTags:
+        # pass
+        List()
+    elif val['tag'] == "EOF":
+        EOF()
+    else:
+        error("Syntax", val)
     EOF()
 
 def EOF():
-    global dictList
-    if token == "EOF":
-        return
+    print("EOF")
+    dumpSymbolTable()
 
 def List():
-    global dictList
+    val = peek()
+    if val['item'] == '(' or val['tag'] in ["NUM","ID"]:
+        Expr()
+        match(';')
+        List()
+    else:
+        return "pass"
 
 def Expr():
-    global dictList
+    Term()
+    Terms()
 
 def Term():
-    global dictList
+    Factor()
+    Factors()
 
 def Terms():
-    global dictList
+    val = token()
+    if val['item'] in ['+','-']:
+        Term()
+        match(val['item'])
+        Terms()
+    else:
+        return "pass"
 
 def Factor():
-    global dictList
+    val = token()
+    if val['item'] == '(':
+        match(val['item'])
+        Expr()
+        val = token()
+        if val['item'] != ')':
+            error("Syntax", val)
+        else:
+            match(val['item'])
+    elif val['tag'] == 'ID':
+        match(val['item'])
+    elif val['tag'] == 'NUM':
+        match(val['item'])
 
 def Factors():
-    global dictList
+    val = token()
+    if val['item'] in ['*','/']:
+        Factor()
+        match(val['item'])      ## print '*' or '/'
+        Factors()
+    elif val['tag'] == 'MOD':
+        Factor()
+        match(val['item'])
+        Factors()
+    else:
+        return
+
+def dumpSymbolTable():
+    pass
 
 
 
@@ -209,11 +291,11 @@ def main():
     listOfStatements = processInput(fileName)
     initDict(len(listOfStatements))
     # print(dictList)
-    print(listOfStatements)
-    print()
+    # print(listOfStatements)
+    # print()
     tokenize(listOfStatements)
 
-    Start()
+    # Start()
     # print(dictList)
 
     # print(next(["&"],0,0))
@@ -224,6 +306,19 @@ def main():
         # print("Line "+str(line))
         print(dictList[line])
     # print(dictList)
+
+    # print(token())
+    # print("peek=",peek())
+    # print(token())
+    # print(token())
+    # print(token())
+    # print(token())
+    # print(token())
+    # print("peek=",peek())
+    # print(token())
+    # print(token())
+
+    # showError("Syntax", {'item': '*', 'line_pos': 2, 'line_num': 3, 'tag': 'FACTOR'})
 
 main()
 
