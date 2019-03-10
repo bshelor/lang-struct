@@ -107,7 +107,7 @@ def tokenize(lst):
         pos = 0
         while pos < len(lst[line]):
             item, pos, tag = next(lst[line], pos)
-            dictList[line].append({'item': item, 'line_pos': (pos-len(item)), 'line_num': line, 'tag': tag})    
+            dictList[line].append({'item': item, 'line_pos': (pos-len(item)), 'line_num': line+1, 'tag': tag})    
 
 def error(type, token, msg):
     print("\n"+type+" Error ----------------------------------")
@@ -229,7 +229,7 @@ def dumpSymbolTable():
     global symbolTable
     print("Symbol Table:", end=" ")
     for i in symbolTable:
-        print(str(i['item'])+' (line '+str(i['line_num'])+'), ', end="")
+        print(str(i['item'])+' (line '+str(i['line_num'])+':'+str(i['line_pos'])+')', end=", ")
 
 
 
@@ -238,6 +238,9 @@ def main():
     fileName = sys.argv[1]
     listOfStatements = processInput(fileName)
     initDict(len(listOfStatements))
+
+    print(listOfStatements)
+    print(dictList)
     
     tokenize(listOfStatements)
 
