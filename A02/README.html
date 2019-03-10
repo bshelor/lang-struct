@@ -1,0 +1,80 @@
+<meta charset="utf-8" lang="en">
+
+**A02 - Language Translation**
+
+
+Student Info
+============
+
+Your name: Bryson Shelor
+
+Operating system: Windows 10
+
+Lab computer or your own computer: My own computer
+
+TA's or Tutor's name (if received help): NA
+
+Did you receive help from your instructor? Yes.  Thank you!!
+
+
+Implementations
+================
+
+
+Recursive Descent Parser
+--------------------------------
+
+To run this file, navigate to your command line and type in the following:
+~~~~~~~~~~~ Python
+python rdp.py rdp_input.txt
+~~~~~~~~~~~
+
+As you can see, I take the input from a file.  After parsing through this input, I display
+the proper Postfix format on standard output. (See below)
+
+![My Python RDP program running against an input file](./rdp_working.png)
+
+I was able to store the line numbers of where the variables first appeared, and I display
+that with my symbolTable dump.  Other than that, this program runs pretty standard and displays
+the output in the proper postfix format.
+
+My implementation was written in Python and uses a lot of recursion and dictionaries.  I have multiple
+dictionaries that store iteration information, the tokenized input, and the symbol table.  This might not
+be the most efficient tactic, but it gets the job done.  I can basically add infinite amount of information
+that I want for each token, as each one is stored as its own dictionary.
+
+This was quite difficult for me.  It was tough for me to conceptualize the recursive nature of this
+program.  Translating the grammar into code proved to be very hard and time consuming.  I spent 13 hours on 
+this 1/3 of the project alone.  Not good.  But I was able to power through and finish, and it feels good!
+I feel like I have a much better understanding of how this kind of thing works, and I think this will help
+me a lot with the group project.  Wrestling with the hard problems will allow me to be more effective in 
+similar situations in the future.
+
+
+C: Recursive Descent Parser
+--------------------------------
+
+I was unable to spend time on this implementation.
+
+Java: ANTLR + Java Code in IntelliJ Project
+--------------------------------
+
+I was unable to spend time on this implementation.
+
+
+Assignment Reflection
+======================
+
+Hours to complete assignment: 13 (RDP)
+
+
+
+
+
+<!--
+
+Leave the following, as this will format your text above to look nice.
+
+-->
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");</script>

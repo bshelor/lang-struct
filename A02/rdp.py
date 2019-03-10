@@ -1,8 +1,9 @@
 import sys
 
-global dictList, validTags, tokenIter
+global dictList, validTags, tokenIter, symbolTable
 
 dictList = []
+symbolTable = []
 validTags = ['NUM','ID','FACTOR','TERM','MOD','OTHER','EXPR_END','PAREN']
 tokenIter = {'line': 0, 'iter': 0}
 
@@ -23,13 +24,8 @@ def processInput(fileName):
     statement = ""
     lst = []
     for x in file:
-        # print(x)
         for char in x:
-            # print(char)
-            # print("statement=" + statement)
-            # print("statement + char="+statement+char)
             if char == ";" or "EOF" in statement+char:
-                # print("got here")
                 statement += char
                 lst.append(statement)
                 statement = ""
@@ -107,78 +103,16 @@ def tokenize(lst):
     pos = 0
 
     for line in range(len(lst)):
-        # print("line="+lst[line])
-        # print("length of line --> "+str(len(lst[line])))
         dictList[line] = []
         pos = 0
         while pos < len(lst[line]):
             item, pos, tag = next(lst[line], pos)
             dictList[line].append({'item': item, 'line_pos': (pos-len(item)), 'line_num': line, 'tag': tag})    
-            # print(item)
-            # print(pos)
-            # print(tag)
-    
 
-# def tokenize(lst):
-#     global dictList
-#     for i in range(len(lst)):
-#         position = 0
-#         term_str = ""
-#         term_pos = 0
-#         for char in lst[i]:
-#             # print("char="+char)
-#             # print("term_str="+term_str)
-#             # print()
-#             if term_str == "MOD" or term_str == "EOF":
-#                 dictList[i]["keyword"][term_pos] = term_str
-#                 term_str = ""
-#                 term_pos = 0
-#             if char in ["+","-"]:
-#                 if term_str != "":
-#                     dictList[i]["terminal"]["ID"][term_pos] = term_str
-#                     term_str = ""
-#                     term_pos = 0
-#                 dictList[i]["term"][position] = char
-#             elif char in ["*","/"]:
-#                 if term_str != "":
-#                     dictList[i]["terminal"]["ID"][term_pos] = term_str
-#                     term_str = ""
-#                     term_pos = 0
-#                 dictList[i]["factor"][position] = char
-#             elif char in ["(",")"]:
-#                 if term_str != "":
-#                     dictList[i]["terminal"]["ID"][term_pos] = term_str
-#                     term_str = ""
-#                     term_pos = 0
-#                 dictList[i]["parenthesis"][position] = char
-#             elif char == ";":
-#                 if term_str != "":
-#                     dictList[i]["terminal"]["ID"][term_pos] = term_str
-#                     term_str = ""
-#                     term_pos = 0
-#                 dictList[i]["EOF"][position] = char
-#             elif char.isdigit():
-#                 if term_str == "":
-#                     dictList[i]["terminal"]["NUM"][position] = char
-#                 else:
-#                     term_str += char
-#             else:
-#                 if term_str == "":
-#                     term_pos = position
-#                 term_str += char
-#                 # dictList[i]["terminal"][position] = char
-#             if position == (len(lst[i])-1) and term_str != "":
-#                 # print("got here")
-#                 if term_str == "MOD" or term_str == "EOF":
-#                     dictList[i]["keyword"][term_pos] = term_str
-#                 else:
-#                     dictList[i]["terminal"]["ID"][term_pos] = term_str
-
-#             position+=1
-
-def error(type, token):
+def error(type, token, msg):
     print("\n"+type+" Error ----------------------------------")
-    print("on line "+str(token["line_num"])+", near "+str(token["item"]))
+    print("on line "+str(token["line_num"])+", near '"+str(token["item"])+"'")
+    print(msg)
     exit()
 
 def token():
@@ -214,24 +148,24 @@ def Start():
     val = peek()
 
     if val['tag'] in validTags:
-        print("valid tag")
         List()
     elif val['tag'] == "EOF":
         EOF()
     else:
-        error("Syntax", val)
+        error("Syntax", val, "Invalid input")
     EOF()
 
 def EOF():
-    print("EOF")
+    match("EOF")
+    print()
     dumpSymbolTable()
 
 def List():
     val = peek()
     if val['item'] == '(' or val['tag'] in ["NUM","ID"]:
-        print("got through List")
         Expr()
         match(';')
+        token()
         List()
     else:
         return
@@ -245,44 +179,57 @@ def Term():
     Factors()
 
 def Terms():
-    val = token()
+    val = peek()
     if val['item'] in ['+','-']:
+        token()
         Term()
         match(val['item'])
         Terms()
     else:
-        return "pass"
+        return
 
 def Factor():
-    val = token()
+    global symbolTable
+    val = peek()
     if val['item'] == '(':
+        token()
         match(val['item'])
         Expr()
         val = token()
         if val['item'] != ')':
-            error("Syntax", val)
+            error("Syntax", val, "Must end an expression with a closing ')'")
         else:
             match(val['item'])
     elif val['tag'] == 'ID':
+        token()
         match(val['item'])
+        symbolTable.append(val)
     elif val['tag'] == 'NUM':
+        token()
         match(val['item'])
 
 def Factors():
-    val = token()
+    val = peek()
     if val['item'] in ['*','/']:
+        token()
         Factor()
-        match(val['item'])      ## print '*' or '/'
+        match(val['item'])              ## print '*' or '/'
         Factors()
     elif val['tag'] == 'MOD':
+        token()
         Factor()
         match(val['item'])
         Factors()
+    elif val['tag'] == 'ID':
+        error("Syntax", val, "Can't have letters directly after a number. Hint: try putting a space or an operand in between")
     else:
         return
 
 def dumpSymbolTable():
-    print("dumping symbol table...")
+    global symbolTable
+    print("Symbol Table:", end=" ")
+    for i in symbolTable:
+        print(str(i['item'])+' (line '+str(i['line_num'])+'), ', end="")
 
 
 
@@ -291,37 +238,11 @@ def main():
     fileName = sys.argv[1]
     listOfStatements = processInput(fileName)
     initDict(len(listOfStatements))
-    # print(dictList)
-    # print(listOfStatements)
-    # print()
+    
     tokenize(listOfStatements)
 
-    # print(dictList)
-
-    # print(next(["&"],0,0))
-
-    # tokenize(listOfStatements)
-
-    for line in range(len(dictList)):
-        # print("Line "+str(line))
-        print(dictList[line])
-    # print(dictList)
-
-    print()
+    print("\n", "-------------Postfix Translation and Symbol Table Dump-------------")
     Start()
-
-    # print(token())
-    # print("peek=",peek())
-    # print(token())
-    # print(token())
-    # print(token())
-    # print(token())
-    # print(token())
-    # print("peek=",peek())
-    # print(token())
-    # print(token())
-
-    # showError("Syntax", {'item': '*', 'line_pos': 2, 'line_num': 3, 'tag': 'FACTOR'})
+    print()
 
 main()
-
