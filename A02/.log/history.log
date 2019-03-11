@@ -6864,3 +6864,28 @@ CompilationStatus (AEW): 0 0 0
 UpdateTree (AD): 1 0
 + /antlr_output.PNG
 
+--[ 2019.03.10.23.11.24.007.0 ]--
+:/rdp.py
+- 241
+- 241
+- 241
+--[ 2019.03.10.23.11.24.185.0 ]--
+:/README.html
+r 32 I created this program in Python. As you can see, I take the input from a file.  After parsing through this input, I display
+r 62 Below is a screenshot of my grammar and java code:
+- 65
+r 67 ![Output of my ANTLR definitions and actions](./antlr_output.png)
++ 69 This part of the assignment was not terribly difficult, as spending so much time on the RDP gave me a good understanding
++ 70 of how the grammar was working.  I got this done fairly quickly, and implemented it in a pretty standard way.
+r 72 ANTLR with Listener/Visitor
+r 75 I chose to not complete this implementation as I had already reached full credit with extra credit points.
+r 76 I did the line numbers for the Python implementation of RDP.
++ 80 
++ 81 Hours to complete assignment: 13 (RDP), 3 (ANTLR) --- 16 total
++ 82 
++ 83 I enjoyed this assignment.  Spending so much time on RDP gave me a deep understanding of how the recursive nature
++ 84 of lexer analysis works.  I am much more comfortable with grammar and parsing now, which is a good thing.  I think this assignment
++ 85 allowed us to wrestle with the toughness of recursion while gaining a better understanding of parsing.  
+r 87 I want to note that I did complete the extra credit portion of storing the line numbers for the symbol table.
+--[ 2019.03.10.23.11.25.600.0 ]--
+DisposeComponent
