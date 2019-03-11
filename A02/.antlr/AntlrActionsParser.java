@@ -1,4 +1,4 @@
-// Generated from C:/Users/bshelor24/Documents/Taylor 2018-19/lang-struct/A02\AntlrActions.g4 by ANTLR 4.7.2
+// Generated from c:\Users\bshelor24\Documents\Taylor 2018-19\lang-struct\A02\AntlrActions.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class AntlrActionsParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -21,26 +21,17 @@ public class AntlrActionsParser extends Parser {
 	public static final int
 		RULE_block = 0, RULE_start = 1, RULE_list = 2, RULE_expr = 3, RULE_terms = 4, 
 		RULE_term = 5, RULE_factors = 6, RULE_factor = 7;
-	private static String[] makeRuleNames() {
-		return new String[] {
-			"block", "start", "list", "expr", "terms", "term", "factors", "factor"
-		};
-	}
-	public static final String[] ruleNames = makeRuleNames();
+	public static final String[] ruleNames = {
+		"block", "start", "list", "expr", "terms", "term", "factors", "factor"
+	};
 
-	private static String[] makeLiteralNames() {
-		return new String[] {
-			null, "'EOF'", "';'", "'+'", "'-'", "'*'", "'/'", "'MOD'", "'('", "')'"
-		};
-	}
-	private static final String[] _LITERAL_NAMES = makeLiteralNames();
-	private static String[] makeSymbolicNames() {
-		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, "ID", "NUM", 
-			"WS"
-		};
-	}
-	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
+	private static final String[] _LITERAL_NAMES = {
+		null, "'EOF'", "';'", "'+'", "'-'", "'*'", "'/'", "'MOD'", "'('", "')'"
+	};
+	private static final String[] _SYMBOLIC_NAMES = {
+		null, null, null, null, null, null, null, null, null, null, "ID", "NUM", 
+		"WS"
+	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -90,7 +81,6 @@ public class AntlrActionsParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
-
 	public static class BlockContext extends ParserRuleContext {
 		public List<String> symbols = new ArrayList<String>();
 		public StartContext start() {
@@ -100,19 +90,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_block; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterBlock(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitBlock(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitBlock(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final BlockContext block() throws RecognitionException {
@@ -145,19 +122,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_start; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterStart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitStart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitStart(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final StartContext start() throws RecognitionException {
@@ -195,19 +159,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitList(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ListContext list() throws RecognitionException {
@@ -262,19 +213,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitExpr(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitExpr(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -311,19 +249,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_terms; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterTerms(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitTerms(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitTerms(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TermsContext terms() throws RecognitionException {
@@ -389,19 +314,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitTerm(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitTerm(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final TermContext term() throws RecognitionException {
@@ -438,19 +350,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_factors; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterFactors(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitFactors(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitFactors(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FactorsContext factors() throws RecognitionException {
@@ -531,19 +430,6 @@ public class AntlrActionsParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_factor; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).enterFactor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AntlrActionsListener ) ((AntlrActionsListener)listener).exitFactor(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AntlrActionsVisitor ) return ((AntlrActionsVisitor<? extends T>)visitor).visitFactor(this);
-			else return visitor.visitChildren(this);
-		}
 	}
 
 	public final FactorContext factor() throws RecognitionException {

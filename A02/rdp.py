@@ -238,9 +238,6 @@ def main():
     fileName = sys.argv[1]
     listOfStatements = processInput(fileName)
     initDict(len(listOfStatements))
-
-    print(listOfStatements)
-    print(dictList)
     
     tokenize(listOfStatements)
 

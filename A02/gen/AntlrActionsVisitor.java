@@ -10,6 +10,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface AntlrActionsVisitor<T> extends ParseTreeVisitor<T> {
 	/**
+	 * Visit a parse tree produced by {@link AntlrActionsParser#block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock(AntlrActionsParser.BlockContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AntlrActionsParser#start}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

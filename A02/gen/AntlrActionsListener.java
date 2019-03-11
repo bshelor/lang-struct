@@ -7,6 +7,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface AntlrActionsListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link AntlrActionsParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(AntlrActionsParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AntlrActionsParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(AntlrActionsParser.BlockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AntlrActionsParser#start}.
 	 * @param ctx the parse tree
 	 */

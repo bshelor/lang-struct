@@ -15,6 +15,18 @@ public class AntlrActionsBaseListener implements AntlrActionsListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBlock(AntlrActionsParser.BlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBlock(AntlrActionsParser.BlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStart(AntlrActionsParser.StartContext ctx) { }
 	/**
 	 * {@inheritDoc}

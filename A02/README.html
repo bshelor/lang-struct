@@ -29,7 +29,7 @@ To run this file, navigate to your command line and type in the following:
 python rdp.py rdp_input.txt
 ~~~~~~~~~~~
 
-As you can see, I take the input from a file.  After parsing through this input, I display
+I created this program in Python. As you can see, I take the input from a file.  After parsing through this input, I display
 the proper Postfix format on standard output. (See below)
 
 ![My Python RDP program running against an input file](./rdp_working.png)
@@ -51,21 +51,40 @@ me a lot with the group project.  Wrestling with the hard problems will allow me
 similar situations in the future.
 
 
-C: Recursive Descent Parser
+ANTLR: Recognizer with Actions for Translation
 --------------------------------
 
-I was unable to spend time on this implementation.
+For this implementation, I chose to define my ANTLR grammar and define actions along with this grammar.
+Each time a certain sequence is matched, the program will then print out the proper character in post-fix
+format.  This program, then, effectively recognizes proper input and properly translates this input from in-fix
+notation to post-fix.
 
-Java: ANTLR + Java Code in IntelliJ Project
+Below is a screenshot of my grammar and java code:
+![My ANTLR Grammer definitions with actions](./antlr_code.png)
+
+![Java file that runs my ANTLR grammar file](./java_code.png)
+
+![Output of my ANTLR definitions and actions](./antlr_output.png)
+
+This part of the assignment was not terribly difficult, as spending so much time on the RDP gave me a good understanding
+of how the grammar was working.  I got this done fairly quickly, and implemented it in a pretty standard way.
+
+ANTLR with Listener/Visitor
 --------------------------------
 
-I was unable to spend time on this implementation.
-
+I chose to not complete this implementation as I had already reached full credit with extra credit points.
+I did the line numbers for the Python implementation of RDP.
 
 Assignment Reflection
 ======================
 
-Hours to complete assignment: 13 (RDP)
+Hours to complete assignment: 13 (RDP), 3 (ANTLR) --- 16 total
+
+I enjoyed this assignment.  Spending so much time on RDP gave me a deep understanding of how the recursive nature
+of lexer analysis works.  I am much more comfortable with grammar and parsing now, which is a good thing.  I think this assignment
+allowed us to wrestle with the toughness of recursion while gaining a better understanding of parsing.  
+
+I want to note that I did complete the extra credit portion of storing the line numbers for the symbol table.
 
 
 
