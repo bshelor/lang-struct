@@ -78,10 +78,39 @@ tree3(
 
 
 % Additional test data
+tree4(
+        tree( 6,
+              tree( 3,
+                     tree( 8, void, void),
+                     tree( 7, void, void)
+                   ),
+              tree(3,void,void)
+        )
+).
 
+tree5(
+        tree(   3,
+                tree(   5,
+                        tree(   9,
+                                tree(7,void,void),
+                                tree(9,void,void)
+                        ),
+                        tree(   4,
+                                tree(5,void,void),
+                                tree(9,void,void)
+                        )
+                )
+        )
+).
+
+% preorder(tree(X,L,R),Xs) :- preorder(L,Ls), preorder(R,Rs),
+%                             append([X|Ls],Rs,Xs).
+% preorder(void,[]).
 
 % inorder
-
+inorder(void, []).
+inorder(tree(X,L,R),Xs) :- inorder(L,Ls), inorder(R,Rs),
+                        append()
 
 % search
 
