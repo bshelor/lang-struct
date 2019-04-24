@@ -140,7 +140,15 @@ sumtree(void, 0).
 sumtree(tree(X,L,R), S) :- sumtree(L, SumLeft), sumtree(R, SumRight), S is X+SumLeft+SumRight.
 
 % ordered
+% tree(10, tree(3, tree(2, void, void), tree(4, void, void)), tree(11, void, tree(17, void, void)))
+bigger(_, void).
+bigger(X, tree(N,L,R)) :- X>N, bigger(X,L), bigger(X,R).
 
+smaller(_, void).
+smaller(X, tree(N,L,R)) :- X<N, smaller(X,R), smaller(X,L).
+
+ordered(void).
+ordered(tree(X,L,R)) :- bigger(X,L), smaller(X,R), ordered(L), ordered(R).
 
 % substitute
 
