@@ -88,8 +88,6 @@ tree4(
         )
 ).
 
-% tree(4,tree(5,void,void),tree(9,void,void))
-
 tree5(
         tree(   3,
                 tree(   5,
@@ -114,16 +112,10 @@ tree5(
                 )
         )
 ).
-
-% tree6(tree(3,tree(5,tree(   9,tree(7,void,void),tree(9,void,void)),tree(   4,tree(5,void,void),tree(9,void,void))),tree(   4,tree(   8,tree(6,void,void),tree(4,void,void)),tree(   7,tree(8,void,void),tree(3,void,void))))).
-
-% preorder(tree(X,L,R),Xs) :- preorder(L,Ls), preorder(R,Rs),
-%                             append([X|Ls],Rs,Xs).
-% preorder(void,[]).
-
+                
 % inorder
-inorder(tree(X,L,R),Xs) :- inorder(L,Ls), inorder(R,Rs), append(Ls,[X|Rs],Xs).
 inorder(void, []).
+inorder(tree(X,L,R),Xs) :- inorder(L,Ls), inorder(R,Rs), append(Ls,[X|Rs],Xs).
 
 % search
 search(tree(Key,_,_), Key).

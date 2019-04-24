@@ -1,0 +1,193 @@
+<meta charset="utf-8" lang="en">
+
+**A04 - Paradigm Logic: Prolog**
+
+
+Student Info
+============
+
+Your name: Bryson Shelor
+
+Operating system: Windows 10
+
+Lab computer or your own computer: My own computer
+
+TA's or Tutor's name (if received help): NA
+
+Did you receive help from your instructor? No
+
+
+Definitions
+================
+
+inorder
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+inorder(void, []).
+inorder(tree(X,L,R),Xs) :- inorder(L,Ls), inorder(R,Rs), append(Ls,[X|Rs],Xs).
+~~~~~~~~~~~
+
+A simple test placed the following tree against my definition:
+~~~~~~~~~~~
+tree(1,tree(2,void,void),tree(3,void,void))
+~~~~~~~~~~~
+
+When I ran this against the proper list formation for an in-order traversal of a tree, it yielded true.
+
+![A correctly traversed (inorder) tree](./inorder_simple.png)
+
+I then changed my in-order list and ran it with this same tree:
+~~~~~~~~~~~
+tree(1,tree(2,void,void),tree(3,void,void))
+~~~~~~~~~~~
+
+The result was `false.`
+![An incorrectly traversed (inorder) tree](./inorder_false.png)
+
+~~~~~~~~~~~
+Line break
+~~~~~~~~~~~
+
+This was my first one, and took me the longest to conceptualize the problem.  Visualizing variables in Prolog
+was very hard for me at first, and I would still say that I do not have a firm grip on it.  This was a good intro 
+into the project as it really forced me to think through the idea of recursively traversing the tree.
+
+
+search
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+search(tree(Key,_,_), Key).
+search(tree(_,Left,_), Key) :- search(Left, Key).
+search(tree(_,_,Right), Key) :- search(Right, Key).
+~~~~~~~~~~~
+
+To keep testing simple at this point, I ran my code against the following tree again:
+~~~~~~~~~~~
+tree(1,tree(2,void,void),tree(3,void,void))
+~~~~~~~~~~~
+
+When looking for a `2`, it yielded the following result:
+![Finding an element in a tree](./search_successful.png)
+
+An element not in the tree yielded a false result:
+![Not finding an element in a tree](./search_false.png)
+
+This was probably the easiest one, as I was able to rely heavily on the pre-written `tree_element` function
+to guide my thought process.  It was basically identical to this, and allowed me to write a solution quickly.
+
+subtree
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+subtree(T,T).
+subtree(T, tree(_,L,_)) :- subtree(T,L).
+subtree(T, tree(_,_,R)) :- subtree(T,R).
+~~~~~~~~~~~
+
+I wrote a much larger tree for test data in this problem.  The following was the tree I used to test this defintion:
+~~~~~~~~~~~
+tree5(
+        tree(   3,
+                tree(   5,
+                        tree(   9,
+                                tree(7,void,void),
+                                tree(9,void,void)
+                        ),
+                        tree(   4,
+                                tree(5,void,void),
+                                tree(9,void,void)
+                        )
+                ),
+                tree(   4,
+                        tree(   8,
+                                tree(6,void,void),
+                                tree(4,void,void)
+                        ),
+                        tree(   7,
+                                tree(8,void,void),
+                                tree(3,void,void)
+                        )
+                )
+        )
+).
+~~~~~~~~~~~
+
+I then checked if the following tree was in `tree5` (which it is)
+~~~~~~~~~~~
+tree(   8,
+        tree(6,void,void),
+        tree(4,void,void)
+)
+~~~~~~~~~~~
+
+And got the following result:
+![Determining that a tree is a subtree of a larger tree](./subtree_true.png)
+
+When I ran this tree against the definition:
+~~~~~~~~~~~
+tree(   8,
+        tree(3,void,void),
+        tree(7,void,void)
+)
+~~~~~~~~~~~
+
+I got this result:
+![Determining that a tree is NOT a subtree of a larger tree](./subtree_false.png)
+
+sumtree
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+sumtree(void, 0).
+sumtree(tree(X,L,R), S) :- sumtree(L, SumLeft), sumtree(R, SumRight), S is X+SumLeft+SumRight.
+~~~~~~~~~~~
+
+`sumtree` correctly determines the sum of a tree's nodes or determines if the number provided is the correct sum.
+
+Below are screenshots of my runs on the program:
+![Sum provided is the sum of the tree. True](./sumtree_true.png)
+
+![Sum provided is NOT the sum of the tree. False.](./sumtree_false.png)
+
+ordered
+--------------------------------
+
+Code for this implementation:
+![ordered implementation](./ordered_imp.png)
+
+~~~~~~~~~~~
+Line break
+~~~~~~~~~~~
+
+Below are screenshots of my implementation:
+![Tree provided is a binary search tree in order. Yields True](./ordered_true.png)
+
+![Tree provided is NOT a binary search tree in order. Yields False](./ordered_false.png)
+
+Assignment Reflection
+======================
+
+Hours to complete assignment: 5
+
+This assignment was a great learning experience.  I really don't enjoy this type of programming, but it was interesting to interact with
+more recursion.  I began to understand on a new level the power of recursion and what it can do.  While this was tough to visualize and 
+execute efficiently, I was able to comprehend the basics of this project.  In the end I have a better grip on prolog and logic languages
+as a whole, which is all I can ask for!
+
+
+
+
+
+<!--
+
+Leave the following, as this will format your text above to look nice.
+
+-->
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");</script>
