@@ -1,4 +1,3 @@
--- Possible prods implementation
 prods :: Int -> [Int]
 prods n = [n*n, (n*n)+n ..]
 
@@ -14,26 +13,53 @@ mix (x:xs) (y:ys) = do
     else
         y : (mix (x:xs) ys)
 
+inList :: Int -> [Int] -> Bool
+inList n [] = False
+inList n (x:xs)
+    | n == x = True
+    | n < x = False
+    | otherwise = inList n xs
 
--- Possible firstn implementation
--- firstn :: Int -> [Int]
--- firstn n = sieve [2..primesto n][]
+sieve :: [Int] -> [Int] -> [Int]
+sieve [] ys = []
+sieve (x:xs) ys = do
+    let addProdsList = prods x
+    let mixList = mix ys addProdsList in
+        if inList x ys == False then do
+            let ys = mixList in
+                x : (sieve xs ys)
+        else
+            let ys = mixList in
+                sieve xs ys
 
--- Possible primesto implementation
--- primesto :: Int -> [Int]
--- primesto n | n < 2 = []
---             | sieve [2..n][]
+concatToLimit :: Int -> [Int] -> [Int] -> [Int]
+concatToLimit limit (x:xs) zs 
+    | length zs == limit = zs
+    | otherwise = concatToLimit limit xs (zs++[x])
 
+firstn :: Int -> [Int]
+firstn n = do
+    let primesList = sieve [2..] [] in
+        -- printList primesList
+        concatToLimit n primesList []
+
+primesto :: Int -> [Int]
+primesto 1 = []
+primesto n = sieve [2..n] []
+            
 printList :: [Int] -> IO ()
 printList [] = return ()
 printList [x] = print(x)
 printList (x:xs) = do
     putStr(show x)
-    putStr " + "
+    putStr ","
     printList xs
 
 main :: IO()
 main = do
     -- let prodsList = prods 5
-    let finalList = mix [1,3,5,8] [2,3,4,7,9]
+    -- let finalList = mix [1,3,5,8] [2,3,4,7,9]
+    let finalList = firstn 4
+    -- let result = inList 11 prodsList
     printList finalList
+    -- print result
