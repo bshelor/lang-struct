@@ -1,0 +1,174 @@
+<meta charset="utf-8" lang="en">
+
+**A05 - Haskell**
+
+
+Student Info
+============
+
+Your name: Bryson Shelor
+
+Operating system: Windows 10
+
+Lab computer or your own computer: My own computer
+
+TA's or Tutor's name (if received help): NA
+
+Did you receive help from your instructor? No
+
+
+Haskell Functions
+================
+
+prods
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+prods :: Int -> [Int]
+prods n = [n*n, (n*n)+n ..]
+~~~~~~~~~~~
+
+I tested this function with the following code inside my main:
+~~~~~~~~~~~
+let prodsList = prods 5
+    printList prodsList
+~~~~~~~~~~~
+
+And it resulted in the following output.  As we can see this is an infinite list incrementing by 5's.
+
+![Infinite list of multiples of 5](./prods_run.png)
+
+
+mix
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+mix :: [Int] -> [Int] -> [Int]
+mix [] [] = []
+mix xs [] = xs
+mix [] ys = ys
+mix (x:xs) (y:ys) = do
+    if x == y then do 
+        x : (mix xs ys)
+    else if x < y then do 
+        x : (mix xs (y:ys))
+    else
+        y : (mix (x:xs) ys)
+~~~~~~~~~~~
+
+I tested functionality with the following code inside my main:
+~~~~~~~~~~~
+let finalList = mix [1,3,5,8] [2,3,4,7,9]
+    printList finalList
+~~~~~~~~~~~
+
+Which resulted in the following output.  The list is sorted as it should be.
+![Sorted list after being mixed from two input lists](./mix_run.png)
+
+
+sieve
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+sieve :: [Int] -> [Int] -> [Int]
+sieve [] ys = []
+sieve (x:xs) ys = do
+    let addProdsList = prods x
+    let mixList = mix ys addProdsList in
+        if inList x ys == False then do
+            let ys = mixList in
+                x : (sieve xs ys)
+        else
+            let ys = mixList in
+                sieve xs ys
+~~~~~~~~~~~
+
+With a helper function to solve the problem.
+~~~~~~~~~~~
+inList :: Int -> [Int] -> Bool
+inList n [] = False
+inList n (x:xs)
+    | n == x = True
+    | n < x = False
+    | otherwise = inList n xs
+~~~~~~~~~~~
+
+Tested with the following code:
+~~~~~~~~~~~
+let finalList = sieve [2..7] []
+    printList finalList
+~~~~~~~~~~~
+
+Expecting to see a list of the first 4 prime numbers, here was our result. 
+![Successful run of sieve function. First 4 prime numbers (2,3,5,7)](./sieve_run.png)
+
+
+firstn
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+firstn :: Int -> [Int]
+firstn n = do
+    let primesList = sieve [2..] [] in
+        concatToLimit n primesList []
+~~~~~~~~~~~
+
+With a helper function to solve the problem.
+~~~~~~~~~~~
+concatToLimit :: Int -> [Int] -> [Int] -> [Int]
+concatToLimit limit (x:xs) zs 
+    | length zs == limit = zs
+    | otherwise = concatToLimit limit xs (zs++[x])
+~~~~~~~~~~~
+
+Tested with the following code:
+~~~~~~~~~~~
+let finalList = firstn 6
+    printList finalList
+~~~~~~~~~~~
+
+We expect to see the first 6 prime numbers, and here was our result:
+![First 6 prime numbers correctly printed out](./firstn_run.png)
+
+
+primesto
+--------------------------------
+
+Code for this implementation:
+~~~~~~~~~~~
+primesto :: Int -> [Int]
+primesto 1 = []
+primesto n = sieve [2..n] []
+~~~~~~~~~~~
+
+
+Tested with the following code:
+~~~~~~~~~~~
+let finalList = primesto 30
+    printList finalList
+~~~~~~~~~~~
+
+We expect to see all prime numbers up to 30, and here is our result:
+![All prime numbers under 30](./primesto_run.png)
+
+Assignment Reflection
+======================
+
+Hours to complete assignment: 4
+
+I really enjoyed this assignment!  I honestly like haskell quite a bit.  While I don't know how much I'll use it in the future,
+it gives me a good experience in learning about the power of recursion for looping operations.  Haskell forces you to do that a lot
+to solve problems, so this was a good practice for that.
+
+
+<!--
+
+Leave the following, as this will format your text above to look nice.
+
+-->
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");</script>

@@ -40,7 +40,6 @@ concatToLimit limit (x:xs) zs
 firstn :: Int -> [Int]
 firstn n = do
     let primesList = sieve [2..] [] in
-        -- printList primesList
         concatToLimit n primesList []
 
 primesto :: Int -> [Int]
@@ -58,8 +57,14 @@ printList (x:xs) = do
 main :: IO()
 main = do
     -- let prodsList = prods 5
+    -- printList prodsList
     -- let finalList = mix [1,3,5,8] [2,3,4,7,9]
-    let finalList = firstn 4
+    -- printList finalList
+    -- let finalList = sieve [2..7] []
+    -- printList finalList
+    -- let finalList = firstn 6
+    -- printList finalList
+    -- let finalList = primesto 30
+    -- printList finalList
     -- let result = inList 11 prodsList
-    printList finalList
     -- print result
